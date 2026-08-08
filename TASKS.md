@@ -71,3 +71,13 @@ depender de browser nem de GraphQL.
 - **Testes end-to-end com Playwright**, cobrindo o fluxo completo de digitar
   e clicar numa sugestão.
 - **Busca por substring além de prefixo**, com peso menor no ranking.
+
+## Desvio do plano
+
+O PR 5 previa Docker + documentação juntos. Na prática virou três PRs
+(`chore/docker`, `ci/pipeline`, `docs/comments`): cada um tinha um critério de
+pronto diferente e agrupá-los deixaria o diff difícil de revisar.
+
+A CI também saiu do lugar previsto — planejei configurá-la primeiro, mas
+adiantei o backend para ter algo de concreto rodando antes. O efeito colateral
+foi que os dois primeiros PRs não tiveram check automático.
