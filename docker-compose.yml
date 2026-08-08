@@ -1,0 +1,27 @@
+services:
+  api:
+    build: ./apps/api
+    ports:
+      - "8000:8000"
+
+  graphql:
+    build: ./apps/graphql
+    ports:
+      - "4000:4000"
+    environment:
+      # Dentro da rede do compose, "api" é o hostname do serviço.
+      API_URL: http://api:8000
+    depends_on:
+      - api
+
+  web:
+    build: ./apps/web
+    ports:
+      - "5173:5173"
+    environment:
+      # ATENÇÃO: aqui é localhost, não "graphql".
+      # Quem faz essa chamada é o NAVEGADOR do usuário, que está fora
+      # da rede do Docker e só enxerga as portas publicadas.
+      VITE_GRAPHQL_URL: http://localhost:4000/
+    depends_on:
+      - graphql
